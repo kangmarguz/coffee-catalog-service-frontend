@@ -1,10 +1,11 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { isAdminSessionActive } from "../auth/session";
+import { useAuth } from "../auth/AuthContext";
 
 function RequireAdmin({ children }) {
   const location = useLocation();
+  const { isAdmin } = useAuth();
 
-  if (!isAdminSessionActive()) {
+  if (!isAdmin) {
     return <Navigate replace state={{ from: location }} to="/Login" />;
   }
 

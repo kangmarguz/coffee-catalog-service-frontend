@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../api/authApi";
-import { startAdminSession, isAdminSessionActive } from "../auth/session";
+import { useAuth } from "../auth/AuthContext";
 import SectionHeading from "../components/SectionHeading";
 
 function LoginPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAdmin, loginAdmin } = useAuth();
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -16,7 +17,7 @@ function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const from = location.state?.from?.pathname || "/admin/coffees";
 
-  if (isAdminSessionActive()) {
+  if (isAdmin) {
     return <Navigate replace to="/admin/coffees" />;
   }
 
@@ -34,7 +35,7 @@ function LoginPage() {
 
     try {
       const response = await login(formState);
-      startAdminSession(response.result);
+      loginAdmin(response.result);
       toast.success("Login successful.");
       navigate(from, { replace: true });
     } catch (error) {

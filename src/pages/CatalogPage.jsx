@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { getCoffees } from "../api/coffeeApi";
-import { isAdminSessionActive } from "../auth/session";
+import { useAuth } from "../auth/AuthContext";
 import CoffeeCard from "../components/CoffeeCard";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
@@ -17,7 +17,7 @@ const initialFilters = {
 };
 
 function CatalogPage() {
-  const isAdmin = isAdminSessionActive();
+  const { isAdmin } = useAuth();
   const [filters, setFilters] = useState(initialFilters);
   const [queryFilters, setQueryFilters] = useState(initialFilters);
   const [coffees, setCoffees] = useState([]);

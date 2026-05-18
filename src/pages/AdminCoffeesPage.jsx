@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PencilLine, Plus, Trash2 } from "lucide-react";
+import { AlertTriangle, PencilLine, Plus, Trash2, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deleteCoffee, getCoffees } from "../api/coffeeApi";
@@ -14,10 +14,13 @@ function confirmDeleteToast() {
     const toastId = toast(
       ({ closeToast }) => (
         <div className="flex flex-col gap-3">
-          <p className="text-sm font-medium text-stone-900">Delete this coffee item?</p>
+          <p className="inline-flex items-center gap-2 text-sm font-medium text-stone-900">
+            <AlertTriangle size={16} className="text-rose-600" />
+            Delete this coffee item?
+          </p>
           <div className="flex gap-2">
             <button
-              className="rounded-full bg-rose-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-rose-500"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-rose-500"
               onClick={() => {
                 handled = true;
                 resolve(true);
@@ -25,10 +28,11 @@ function confirmDeleteToast() {
               }}
               type="button"
             >
+              <Trash2 size={14} />
               Delete
             </button>
             <button
-              className="rounded-full border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-stone-50"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-stone-50"
               onClick={() => {
                 handled = true;
                 resolve(false);
@@ -36,6 +40,7 @@ function confirmDeleteToast() {
               }}
               type="button"
             >
+              <X size={14} />
               Cancel
             </button>
           </div>
@@ -183,7 +188,7 @@ function AdminCoffeesPage() {
                     <PencilLine size={16} />
                   </Link>
                   <button
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-rose-200 text-rose-600 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-rose-200 text-rose-600 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-60"
                     disabled={deletingId === coffee.id}
                     onClick={() => handleDelete(coffee.id)}
                     type="button"

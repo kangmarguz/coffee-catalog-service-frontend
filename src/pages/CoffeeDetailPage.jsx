@@ -3,14 +3,14 @@ import { ArrowLeft, Bean, MapPin, PencilLine } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCoffeeById } from "../api/coffeeApi";
-import { isAdminSessionActive } from "../auth/session";
+import { useAuth } from "../auth/AuthContext";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
 import StatusBadge from "../components/StatusBadge";
 
 function CoffeeDetailPage() {
   const { id } = useParams();
-  const isAdmin = isAdminSessionActive();
+  const { isAdmin } = useAuth();
   const [coffee, setCoffee] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

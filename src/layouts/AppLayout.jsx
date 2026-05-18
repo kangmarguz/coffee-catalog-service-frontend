@@ -1,6 +1,6 @@
 import { Coffee, LogOut, Settings } from "lucide-react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { endAdminSession, isAdminSessionActive } from "../auth/session";
+import { useAuth } from "../auth/AuthContext";
 
 const navLinkClass = ({ isActive }) =>
   [
@@ -13,10 +13,10 @@ const navLinkClass = ({ isActive }) =>
 function AppLayout({ children }) {
   useLocation();
   const navigate = useNavigate();
-  const isAdmin = isAdminSessionActive();
+  const { isAdmin, logoutAdmin } = useAuth();
 
   function handleLogout() {
-    endAdminSession();
+    logoutAdmin();
     navigate("/");
   }
 
@@ -52,7 +52,7 @@ function AppLayout({ children }) {
                     </span>
                   </NavLink>
                   <button
-                    className="inline-flex items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-rose-900/10 transition hover:-translate-y-0.5 hover:bg-rose-500 hover:shadow-rose-900/20"
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-rose-900/10 transition hover:-translate-y-0.5 hover:bg-rose-500 hover:shadow-rose-900/20"
                     onClick={handleLogout}
                     type="button"
                   >
