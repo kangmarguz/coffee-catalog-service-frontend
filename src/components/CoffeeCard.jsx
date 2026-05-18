@@ -27,7 +27,7 @@ function CoffeeCard({ coffee }) {
           <StatusBadge available={coffee.isAvailable} />
         </div>
 
-        <p className="line-clamp-3 text-sm leading-7 text-stone-600">
+        <p className="overflow-hidden text-sm leading-7 text-stone-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
           {coffee.description}
         </p>
 
@@ -66,4 +66,3 @@ function CoffeeCard({ coffee }) {
 }
 
 export default CoffeeCard;
-

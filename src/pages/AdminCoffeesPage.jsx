@@ -8,6 +8,60 @@ import LoadingState from "../components/LoadingState";
 import SectionHeading from "../components/SectionHeading";
 import StatusBadge from "../components/StatusBadge";
 
+function confirmDeleteToast() {
+  return new Promise((resolve) => {
+    let handled = false;
+    const toastId = toast(
+      ({ closeToast }) => (
+        <div className="flex flex-col gap-3">
+          <p className="text-sm font-medium text-stone-900">Delete this coffee item?</p>
+          <div className="flex gap-2">
+            <button
+              className="rounded-full bg-rose-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-rose-500"
+              onClick={() => {
+                handled = true;
+                resolve(true);
+                closeToast();
+              }}
+              type="button"
+            >
+              Delete
+            </button>
+            <button
+              className="rounded-full border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-stone-50"
+              onClick={() => {
+                handled = true;
+                resolve(false);
+                closeToast();
+              }}
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        autoClose: false,
+        closeOnClick: false,
+        draggable: false,
+        onClose: () => {
+          if (!handled) {
+            resolve(false);
+          }
+        },
+      }
+    );
+
+    setTimeout(() => {
+      if (handled) {
+        return;
+      }
+      toast.dismiss(toastId);
+    }, 15000);
+  });
+}
+
 function AdminCoffeesPage() {
   const [coffees, setCoffees] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +85,7 @@ function AdminCoffeesPage() {
   }, []);
 
   async function handleDelete(id) {
-    const confirmed = window.confirm("Delete this coffee item?");
+    const confirmed = await confirmDeleteToast();
     if (!confirmed) {
       return;
     }
