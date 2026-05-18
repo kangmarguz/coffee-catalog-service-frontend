@@ -3,12 +3,14 @@ import { ArrowLeft, Bean, MapPin, PencilLine } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCoffeeById } from "../api/coffeeApi";
+import { isAdminSessionActive } from "../auth/session";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
 import StatusBadge from "../components/StatusBadge";
 
 function CoffeeDetailPage() {
   const { id } = useParams();
+  const isAdmin = isAdminSessionActive();
   const [coffee, setCoffee] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -138,13 +140,15 @@ function CoffeeDetailPage() {
                 ${Number(coffee.price).toFixed(2)}
               </p>
             </div>
-            <Link
-              className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
-              to={`/admin/coffees/${coffee.id}/edit`}
-            >
-              <PencilLine size={16} />
-              Edit coffee
-            </Link>
+            {isAdmin ? (
+              <Link
+                className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
+                to={`/admin/coffees/${coffee.id}/edit`}
+              >
+                <PencilLine size={16} />
+                Edit coffee
+              </Link>
+            ) : null}
           </div>
         </div>
       </section>

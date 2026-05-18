@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { getCoffees } from "../api/coffeeApi";
+import { isAdminSessionActive } from "../auth/session";
 import CoffeeCard from "../components/CoffeeCard";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
@@ -16,7 +17,9 @@ const initialFilters = {
 };
 
 function CatalogPage() {
+  const isAdmin = isAdminSessionActive();
   const [filters, setFilters] = useState(initialFilters);
+  const [queryFilters, setQueryFilters] = useState(initialFilters);
   const [coffees, setCoffees] = useState([]);
   const [meta, setMeta] = useState({ total: 0, page: 1, limit: 12 });
   const [loading, setLoading] = useState(true);
@@ -31,10 +34,11 @@ function CatalogPage() {
 
       try {
         const response = await getCoffees({
-          search: filters.search || undefined,
+          search: queryFilters.search || undefined,
           roastLevel:
-            filters.roastLevel === "all" ? undefined : filters.roastLevel,
-          available: filters.available === "all" ? undefined : filters.available,
+            queryFilters.roastLevel === "all" ? undefined : queryFilters.roastLevel,
+          available:
+            queryFilters.available === "all" ? undefined : queryFilters.available,
           page: 1,
           limit: 12,
         });
@@ -60,15 +64,31 @@ function CatalogPage() {
     return () => {
       cancelled = true;
     };
-  }, [filters]);
+  }, [queryFilters]);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setQueryFilters((current) => ({
+        ...current,
+        search: filters.search,
+      }));
+    }, 1500);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [filters.search]);
 
   function handleFilterChange(event) {
     const { name, value } = event.target;
     setFilters((current) => ({ ...current, [name]: value }));
+
+    if (name !== "search") {
+      setQueryFilters((current) => ({ ...current, [name]: value }));
+    }
   }
 
   function handleReset() {
     setFilters(initialFilters);
+    setQueryFilters(initialFilters);
   }
 
   return (
@@ -86,21 +106,23 @@ function CatalogPage() {
               Browse expressive origins, polished tasting profiles, and a catalog
               designed with clarity, restraint, and generous spacing.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
-                to="/admin/coffees/new"
-              >
-                Add a coffee
-                <ArrowRight size={16} />
-              </Link>
-              <Link
-                className="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50"
-                to="/admin/coffees"
-              >
-                Manage catalog
-              </Link>
-            </div>
+            {isAdmin ? (
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link
+                  className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
+                  to="/admin/coffees/new"
+                >
+                  Add a coffee
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  className="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50"
+                  to="/admin/coffees"
+                >
+                  Manage catalog
+                </Link>
+              </div>
+            ) : null}
           </div>
 
           <div className="rounded-[2rem] bg-[linear-gradient(160deg,_rgba(28,25,23,0.96),_rgba(68,64,60,0.82))] p-8 text-white shadow-[0_30px_90px_rgba(28,25,23,0.18)]">

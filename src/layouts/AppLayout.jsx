@@ -1,5 +1,6 @@
-import { Coffee, Plus, Settings } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { Coffee, LogOut, Settings } from "lucide-react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { endAdminSession, isAdminSessionActive } from "../auth/session";
 
 const navLinkClass = ({ isActive }) =>
   [
@@ -10,6 +11,15 @@ const navLinkClass = ({ isActive }) =>
   ].join(" ");
 
 function AppLayout({ children }) {
+  useLocation();
+  const navigate = useNavigate();
+  const isAdmin = isAdminSessionActive();
+
+  function handleLogout() {
+    endAdminSession();
+    navigate("/");
+  }
+
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.95),_rgba(242,238,233,0.92)_38%,_rgba(230,224,217,0.8)_100%)] text-stone-900">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-12 pt-6 sm:px-6 lg:px-8">
@@ -33,18 +43,24 @@ function AppLayout({ children }) {
               <NavLink className={navLinkClass} to="/">
                 Catalog
               </NavLink>
-              <NavLink className={navLinkClass} to="/admin/coffees">
-                <span className="inline-flex items-center gap-2">
-                  <Settings size={16} />
-                  Manage
-                </span>
-              </NavLink>
-              <NavLink className={navLinkClass} to="/admin/coffees/new">
-                <span className="inline-flex items-center gap-2">
-                  <Plus size={16} />
-                  New Coffee
-                </span>
-              </NavLink>
+              {isAdmin ? (
+                <>
+                  <NavLink className={navLinkClass} to="/admin/coffees">
+                    <span className="inline-flex items-center gap-2">
+                      <Settings size={16} />
+                      Manage
+                    </span>
+                  </NavLink>
+                  <button
+                    className="inline-flex items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-rose-900/10 transition hover:-translate-y-0.5 hover:bg-rose-500 hover:shadow-rose-900/20"
+                    onClick={handleLogout}
+                    type="button"
+                  >
+                    <LogOut size={16} />
+                    Logout
+                  </button>
+                </>
+              ) : null}
             </nav>
           </div>
         </header>
@@ -56,4 +72,3 @@ function AppLayout({ children }) {
 }
 
 export default AppLayout;
-

@@ -4,7 +4,9 @@ import AdminCoffeesPage from "../pages/AdminCoffeesPage";
 import CatalogPage from "../pages/CatalogPage";
 import CoffeeDetailPage from "../pages/CoffeeDetailPage";
 import EditCoffeePage from "../pages/EditCoffeePage";
+import LoginPage from "../pages/LoginPage";
 import NewCoffeePage from "../pages/NewCoffeePage";
+import RequireAdmin from "./RequireAdmin";
 
 function AppRoutes() {
   return (
@@ -12,9 +14,32 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<CatalogPage />} />
         <Route path="/coffees/:id" element={<CoffeeDetailPage />} />
-        <Route path="/admin/coffees" element={<AdminCoffeesPage />} />
-        <Route path="/admin/coffees/new" element={<NewCoffeePage />} />
-        <Route path="/admin/coffees/:id/edit" element={<EditCoffeePage />} />
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/admin/coffees"
+          element={
+            <RequireAdmin>
+              <AdminCoffeesPage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/coffees/new"
+          element={
+            <RequireAdmin>
+              <NewCoffeePage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/coffees/:id/edit"
+          element={
+            <RequireAdmin>
+              <EditCoffeePage />
+            </RequireAdmin>
+          }
+        />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </AppLayout>
@@ -22,4 +47,3 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
-
