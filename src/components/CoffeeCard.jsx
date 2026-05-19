@@ -1,4 +1,5 @@
 import { ArrowUpRight, Bean, MapPin } from "lucide-react";
+import { formatRoastLevel } from "../utils/coffeeValidation";
 import StatusBadge from "./StatusBadge";
 import Button from "./ui/Button";
 import Surface from "./ui/Surface";
@@ -43,7 +44,7 @@ function CoffeeCard({ coffee }) {
           </span>
           <span className="inline-flex items-center gap-2 rounded-full bg-stone-100 px-3 py-1.5">
             <Bean size={14} />
-            {coffee.roastLevel}
+            {formatRoastLevel(coffee.roastLevel)}
           </span>
         </div>
 

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import {
   coffeeFormDefaultValues,
   coffeeFormSchema,
+  formatRoastLevel,
   roastLevels,
   toCoffeeFormValues,
 } from "../utils/coffeeValidation";
@@ -11,7 +12,13 @@ import Button from "./ui/Button";
 import FormField from "./ui/FormField";
 import Surface from "./ui/Surface";
 
-function CoffeeForm({ initialValues, onSubmit, submitting, submitLabel }) {
+function CoffeeForm({
+  cancelTo,
+  initialValues,
+  onSubmit,
+  submitting,
+  submitLabel,
+}) {
   const {
     formState: { errors },
     handleSubmit,
@@ -67,7 +74,7 @@ function CoffeeForm({ initialValues, onSubmit, submitting, submitLabel }) {
         >
             {roastLevels.map((roastLevel) => (
               <option key={roastLevel} value={roastLevel}>
-                {roastLevel}
+                {formatRoastLevel(roastLevel)}
               </option>
             ))}
         </FormField>
@@ -82,7 +89,7 @@ function CoffeeForm({ initialValues, onSubmit, submitting, submitLabel }) {
           label="Price"
           error={errors.price?.message}
           min="0"
-          step="0.01"
+          step="0.5"
           type="number"
           {...register("price")}
         />
@@ -114,9 +121,19 @@ function CoffeeForm({ initialValues, onSubmit, submitting, submitLabel }) {
         Available for ordering
       </label>
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-8 flex flex-wrap justify-end gap-3">
+        {cancelTo ? (
+          <Button
+            className="cursor-pointer hover:-translate-y-0.5"
+            disabled={submitting}
+            to={cancelTo}
+            variant="secondary"
+          >
+            Cancel
+          </Button>
+        ) : null}
         <Button
-          className="min-w-40"
+          className="min-w-40 cursor-pointer"
           disabled={submitting}
           type="submit"
         >

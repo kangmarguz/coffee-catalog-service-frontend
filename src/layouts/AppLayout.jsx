@@ -44,11 +44,11 @@ function AppLayout({ children }) {
             </Link>
 
             <nav className="flex flex-wrap gap-2">
-              <NavLink className={navLinkClass} to="/">
-                Catalog
-              </NavLink>
               {isAdmin ? (
                 <>
+                  <NavLink className={navLinkClass} to="/">
+                    Catalog
+                  </NavLink>
                   <NavLink className={navLinkClass} to="/admin/coffees">
                     <span className="inline-flex items-center gap-2">
                       <Settings size={16} />

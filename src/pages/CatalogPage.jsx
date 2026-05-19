@@ -15,7 +15,7 @@ import Surface from '../components/ui/Surface';
 const initialFilters = {
     search: '',
     roastLevel: 'all',
-    available: 'all',
+    available: 'true',
 };
 
 function CatalogPage() {

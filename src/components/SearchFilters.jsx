@@ -1,4 +1,5 @@
 import { Search, SlidersHorizontal } from "lucide-react";
+import { formatRoastLevel } from "../utils/coffeeValidation";
 import Button from "./ui/Button";
 import FormField from "./ui/FormField";
 import Surface from "./ui/Surface";
@@ -31,7 +32,7 @@ function SearchFilters({ filters, onChange, onReset }) {
         >
           {roastLevels.map((level) => (
             <option key={level} value={level}>
-              {level === "all" ? "All roast levels" : level}
+              {level === "all" ? "All roast levels" : formatRoastLevel(level)}
             </option>
           ))}
         </FormField>

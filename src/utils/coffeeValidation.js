@@ -4,6 +4,13 @@ const optionalText = z.string().trim().optional().or(z.literal(""));
 
 export const roastLevels = ["light", "medium", "medium-dark", "dark"];
 
+export function formatRoastLevel(roastLevel) {
+  return roastLevel
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export const coffeeFormSchema = z.object({
   name: z.string().trim().min(1, "Coffee name is required."),
   origin: z.string().trim().min(1, "Origin is required."),

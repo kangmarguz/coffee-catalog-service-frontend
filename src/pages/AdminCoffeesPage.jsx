@@ -9,6 +9,7 @@ import SectionHeading from "../components/SectionHeading";
 import StatusBadge from "../components/StatusBadge";
 import Button from "../components/ui/Button";
 import Surface from "../components/ui/Surface";
+import { formatRoastLevel } from "../utils/coffeeValidation";
 
 function confirmDeleteToast() {
   return new Promise((resolve) => {
@@ -166,11 +167,11 @@ function AdminCoffeesPage() {
                   </span>
                   {coffee.origin}
                 </span>
-                <span className="capitalize">
+                <span>
                   <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.24em] text-stone-400 md:hidden">
                     Roast
                   </span>
-                  {coffee.roastLevel}
+                  {formatRoastLevel(coffee.roastLevel)}
                 </span>
                 <div>
                   <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-stone-400 md:hidden">

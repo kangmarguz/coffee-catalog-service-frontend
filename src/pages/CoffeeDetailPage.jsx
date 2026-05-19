@@ -9,6 +9,7 @@ import LoadingState from "../components/LoadingState";
 import StatusBadge from "../components/StatusBadge";
 import Button from "../components/ui/Button";
 import Surface from "../components/ui/Surface";
+import { formatRoastLevel } from "../utils/coffeeValidation";
 
 function CoffeeDetailPage() {
   const { id } = useParams();
@@ -116,7 +117,7 @@ function CoffeeDetailPage() {
               </p>
               <p className="mt-3 inline-flex items-center gap-2 text-lg font-medium text-stone-900">
                 <Bean size={18} />
-                {coffee.roastLevel}
+                {formatRoastLevel(coffee.roastLevel)}
               </p>
             </div>
           </div>

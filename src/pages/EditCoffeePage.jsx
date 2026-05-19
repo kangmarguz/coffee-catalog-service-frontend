@@ -73,6 +73,7 @@ function EditCoffeePage() {
         description="Update the product narrative, pricing, or availability without leaving the admin workflow."
       />
       <CoffeeForm
+        cancelTo="/admin/coffees"
         initialValues={coffee}
         submitLabel="Save changes"
         submitting={submitting}
