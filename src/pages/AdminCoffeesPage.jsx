@@ -181,6 +181,7 @@ function AdminCoffeesPage() {
                 <div className="flex justify-end gap-2">
                   <Link
                     className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition hover:border-stone-400 hover:bg-stone-50"
+                    state={{ coffee }}
                     to={`/admin/coffees/${coffee.id}/edit`}
                   >
                     <PencilLine size={16} />

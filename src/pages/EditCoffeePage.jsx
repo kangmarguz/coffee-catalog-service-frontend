@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCoffeeById, updateCoffee } from "../api/coffeeApi";
 import CoffeeForm from "../components/CoffeeForm";
@@ -8,15 +8,21 @@ import SectionHeading from "../components/SectionHeading";
 
 function EditCoffeePage() {
   const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [coffee, setCoffee] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const routeCoffee = location.state?.coffee;
+  const [coffee, setCoffee] = useState(routeCoffee || null);
+  const [loading, setLoading] = useState(!routeCoffee);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadCoffee() {
+      if (!routeCoffee) {
+        setLoading(true);
+      }
+
       try {
         const response = await getCoffeeById(id);
 
@@ -39,7 +45,7 @@ function EditCoffeePage() {
     return () => {
       cancelled = true;
     };
-  }, [id]);
+  }, [id, routeCoffee]);
 
   async function handleSubmit(payload) {
     setSubmitting(true);

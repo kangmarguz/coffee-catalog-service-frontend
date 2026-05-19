@@ -140,7 +140,10 @@ function CoffeeDetailPage() {
               </p>
             </div>
             {isAdmin ? (
-              <Button to={`/admin/coffees/${coffee.id}/edit`}>
+              <Button
+                state={{ coffee }}
+                to={`/admin/coffees/${coffee.id}/edit`}
+              >
                 <PencilLine size={16} />
                 Edit coffee
               </Button>

@@ -1,16 +1,21 @@
+import { forwardRef } from "react";
+
 const fieldClass =
   "w-full rounded-2xl border border-stone-200 bg-stone-50 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-stone-400 focus:bg-white";
 
-function FormField({
-  as: Component = "input",
-  children,
-  className = "",
-  error,
-  icon: Icon,
-  label,
-  wrapperClassName = "",
-  ...props
-}) {
+const FormField = forwardRef(function FormField(
+  {
+    as: Component = "input",
+    children,
+    className = "",
+    error,
+    icon: Icon,
+    label,
+    wrapperClassName = "",
+    ...props
+  },
+  ref
+) {
   return (
     <label className={["block space-y-2", wrapperClassName].join(" ")}>
       {label ? <span className="text-sm font-medium text-stone-700">{label}</span> : null}
@@ -29,6 +34,7 @@ function FormField({
             Icon ? "pl-11" : "",
             className,
           ].join(" ")}
+          ref={ref}
           {...props}
         >
           {children}
@@ -37,6 +43,6 @@ function FormField({
       {error ? <p className="text-xs font-medium text-rose-600">{error}</p> : null}
     </label>
   );
-}
+});
 
 export default FormField;

@@ -14,7 +14,7 @@ document.body.className =
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true }}>
       <App />
       <ToastContainer
         bodyClassName="m-0 flex flex-1 items-start text-sm leading-6"
