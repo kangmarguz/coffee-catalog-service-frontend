@@ -80,7 +80,7 @@ function CoffeeDetailPage() {
       <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <Surface className="overflow-hidden rounded-[2.5rem] p-0" variant="solid">
           <img
-            className="h-full min-h-[24rem] w-full object-cover"
+            className="h-full min-h-96 w-full object-cover"
             src={coffee.imageUrl}
             alt={coffee.name}
           />
@@ -101,7 +101,7 @@ function CoffeeDetailPage() {
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-[1.5rem] bg-stone-100 p-5">
+            <div className="rounded-3xl bg-stone-100 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-stone-500">
                 Origin
               </p>
@@ -110,7 +110,7 @@ function CoffeeDetailPage() {
                 {coffee.origin}
               </p>
             </div>
-            <div className="rounded-[1.5rem] bg-stone-100 p-5">
+            <div className="rounded-3xl bg-stone-100 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-stone-500">
                 Roast level
               </p>
@@ -121,7 +121,7 @@ function CoffeeDetailPage() {
             </div>
           </div>
 
-          <Surface className="mt-8 rounded-[1.5rem] p-6" variant="dark">
+          <Surface className="mt-8 rounded-3xl p-6" variant="dark">
             <p className="text-xs uppercase tracking-[0.24em] text-stone-300">
               Tasting notes
             </p>

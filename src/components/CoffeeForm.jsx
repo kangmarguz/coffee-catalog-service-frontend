@@ -33,7 +33,7 @@ function CoffeeForm({ initialValues, onSubmit, submitting, submitLabel }) {
   return (
     <Surface
       as="form"
-      className="rounded-[2rem] p-6 sm:p-8"
+      className="rounded-4xl p-6 sm:p-8"
       noValidate
       onSubmit={handleSubmit(submitForm)}
     >
@@ -52,7 +52,7 @@ function CoffeeForm({ initialValues, onSubmit, submitting, submitLabel }) {
 
         <FormField
           as="textarea"
-          className="min-h-[7.5rem]"
+          className="min-h-30"
           wrapperClassName="md:col-span-2"
           label="Description"
           error={errors.description?.message}

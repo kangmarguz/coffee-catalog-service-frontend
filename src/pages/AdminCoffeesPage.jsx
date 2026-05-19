@@ -141,7 +141,7 @@ function AdminCoffeesPage() {
       ) : null}
 
       {!loading && coffees.length > 0 ? (
-        <Surface className="overflow-hidden rounded-[2rem]" variant="solid">
+        <Surface className="overflow-hidden rounded-4xl" variant="solid">
           <div className="hidden grid-cols-[1.8fr_1fr_1fr_0.9fr_1fr] gap-4 border-b border-stone-200 px-6 py-4 text-xs font-semibold uppercase tracking-[0.24em] text-stone-500 md:grid">
             <span>Name</span>
             <span>Origin</span>

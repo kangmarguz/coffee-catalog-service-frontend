@@ -26,7 +26,7 @@ function AppLayout({ children }) {
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-12 pt-6 sm:px-6 lg:px-8">
         <Surface
           as="header"
-          className="sticky top-4 z-20 mb-8 rounded-[2rem] px-5 py-4 shadow-[0_20px_60px_rgba(28,25,23,0.08)]"
+          className="sticky top-4 z-20 mb-8 rounded-4xl px-5 py-4 shadow-[0_20px_60px_rgba(28,25,23,0.08)]"
         >
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <Link className="flex items-center gap-3" to="/">

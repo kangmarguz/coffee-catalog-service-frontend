@@ -3,7 +3,7 @@ import Surface from "./ui/Surface";
 
 function EmptyState({ title, description, action }) {
   return (
-    <Surface className="rounded-[2rem] p-12 text-center" variant="dashed">
+    <Surface className="rounded-4xl p-12 text-center" variant="dashed">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-stone-100 text-stone-700">
         <Coffee size={24} />
       </div>

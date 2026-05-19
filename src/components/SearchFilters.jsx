@@ -7,7 +7,7 @@ const roastLevels = ["all", "light", "medium", "medium-dark", "dark"];
 
 function SearchFilters({ filters, onChange, onReset }) {
   return (
-    <Surface className="rounded-[2rem] p-5">
+    <Surface className="rounded-4xl p-5">
       <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
         <SlidersHorizontal size={14} />
         Refine selection

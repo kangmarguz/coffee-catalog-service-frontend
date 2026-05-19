@@ -58,7 +58,7 @@ function LoginPage() {
 
       <Surface
         as="form"
-        className="rounded-[2rem] p-6 sm:p-8"
+        className="rounded-4xl p-6 sm:p-8"
         onSubmit={handleSubmit}
       >
         <FormField

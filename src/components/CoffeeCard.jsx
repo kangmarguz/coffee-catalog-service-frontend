@@ -7,7 +7,7 @@ function CoffeeCard({ coffee }) {
   return (
     <Surface
       as="article"
-      className="group overflow-hidden rounded-[2rem] transition duration-300 hover:-translate-y-1 hover:shadow-[0_35px_90px_rgba(28,25,23,0.12)]"
+      className="group overflow-hidden rounded-4xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_35px_90px_rgba(28,25,23,0.12)]"
       variant="solid"
     >
       <div className="relative h-64 overflow-hidden bg-stone-100">
@@ -16,7 +16,7 @@ function CoffeeCard({ coffee }) {
           src={coffee.imageUrl}
           alt={coffee.name}
         />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/30 to-transparent" />
       </div>
 
       <div className="space-y-5 p-6">

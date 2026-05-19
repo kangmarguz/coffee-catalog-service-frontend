@@ -123,16 +123,16 @@ function CatalogPage() {
             ) : null}
           </div>
 
-          <Surface className="rounded-[2rem] p-8" variant="dark">
+          <Surface className="rounded-4xl p-8" variant="dark">
             <p className="text-xs uppercase tracking-[0.28em] text-stone-300">
               Collection insight
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <div className="rounded-[1.5rem] bg-white/8 p-5">
+              <div className="rounded-3xl bg-white/8 p-5">
                 <p className="text-3xl font-semibold tracking-tight">{meta.total}</p>
                 <p className="mt-2 text-sm text-stone-300">Selectable coffees</p>
               </div>
-              <div className="rounded-[1.5rem] bg-white/8 p-5">
+              <div className="rounded-3xl bg-white/8 p-5">
                 <p className="text-3xl font-semibold tracking-tight">4</p>
                 <p className="mt-2 text-sm text-stone-300">Roast expressions</p>
               </div>
