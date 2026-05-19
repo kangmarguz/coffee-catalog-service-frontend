@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { getCoffees } from "../api/coffeeApi";
@@ -9,6 +8,8 @@ import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
 import SearchFilters from "../components/SearchFilters";
 import SectionHeading from "../components/SectionHeading";
+import Button from "../components/ui/Button";
+import Surface from "../components/ui/Surface";
 
 const initialFilters = {
   search: "",
@@ -93,7 +94,10 @@ function CatalogPage() {
 
   return (
     <div className="space-y-8">
-      <section className="overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/75 px-6 py-10 shadow-[0_30px_100px_rgba(28,25,23,0.08)] backdrop-blur-xl sm:px-8 lg:px-12">
+      <Surface
+        as="section"
+        className="overflow-hidden rounded-[2.5rem] px-6 py-10 sm:px-8 lg:px-12"
+      >
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-stone-500">
@@ -108,24 +112,18 @@ function CatalogPage() {
             </p>
             {isAdmin ? (
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
-                  to="/admin/coffees/new"
-                >
+                <Button to="/admin/coffees/new">
                   Add a coffee
                   <ArrowRight size={16} />
-                </Link>
-                <Link
-                  className="inline-flex items-center rounded-full border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:bg-stone-50"
-                  to="/admin/coffees"
-                >
+                </Button>
+                <Button to="/admin/coffees" variant="secondary">
                   Manage catalog
-                </Link>
+                </Button>
               </div>
             ) : null}
           </div>
 
-          <div className="rounded-[2rem] bg-[linear-gradient(160deg,_rgba(28,25,23,0.96),_rgba(68,64,60,0.82))] p-8 text-white shadow-[0_30px_90px_rgba(28,25,23,0.18)]">
+          <Surface className="rounded-[2rem] p-8" variant="dark">
             <p className="text-xs uppercase tracking-[0.28em] text-stone-300">
               Collection insight
             </p>
@@ -143,9 +141,9 @@ function CatalogPage() {
               Built for browsing first, with fast paths into deeper tasting notes
               and an uncluttered admin workflow.
             </p>
-          </div>
+          </Surface>
         </div>
-      </section>
+      </Surface>
 
       <SearchFilters
         filters={filters}
@@ -174,13 +172,11 @@ function CatalogPage() {
             title="No coffees match these filters"
             description="Adjust the search, roast level, or availability filter to see more selections."
             action={
-              <button
-                className="rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
+              <Button
                 onClick={handleReset}
-                type="button"
               >
                 Clear filters
-              </button>
+              </Button>
             }
           />
         ) : null}

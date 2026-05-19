@@ -1,10 +1,15 @@
 import { ArrowUpRight, Bean, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
+import Button from "./ui/Button";
+import Surface from "./ui/Surface";
 
 function CoffeeCard({ coffee }) {
   return (
-    <article className="group overflow-hidden rounded-[2rem] border border-white/70 bg-white/85 shadow-[0_25px_70px_rgba(28,25,23,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_35px_90px_rgba(28,25,23,0.12)]">
+    <Surface
+      as="article"
+      className="group overflow-hidden rounded-[2rem] transition duration-300 hover:-translate-y-1 hover:shadow-[0_35px_90px_rgba(28,25,23,0.12)]"
+      variant="solid"
+    >
       <div className="relative h-64 overflow-hidden bg-stone-100">
         <img
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
@@ -52,16 +57,16 @@ function CoffeeCard({ coffee }) {
             </p>
           </div>
 
-          <Link
-            className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-stone-700"
+          <Button
+            size="sm"
             to={`/coffees/${coffee.id}`}
           >
             Explore
             <ArrowUpRight size={16} />
-          </Link>
+          </Button>
         </div>
       </div>
-    </article>
+    </Surface>
   );
 }
 

@@ -7,6 +7,8 @@ import { useAuth } from "../auth/AuthContext";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
 import StatusBadge from "../components/StatusBadge";
+import Button from "../components/ui/Button";
+import Surface from "../components/ui/Surface";
 
 function CoffeeDetailPage() {
   const { id } = useParams();
@@ -57,12 +59,9 @@ function CoffeeDetailPage() {
         title="Coffee not found"
         description="This item may have been removed or the detail page could not reach the API."
         action={
-          <Link
-            className="inline-flex rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
-            to="/"
-          >
+          <Button to="/">
             Back to catalog
-          </Link>
+          </Button>
         }
       />
     );
@@ -79,15 +78,15 @@ function CoffeeDetailPage() {
       </Link>
 
       <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/75 shadow-[0_30px_100px_rgba(28,25,23,0.08)]">
+        <Surface className="overflow-hidden rounded-[2.5rem] p-0" variant="solid">
           <img
             className="h-full min-h-[24rem] w-full object-cover"
             src={coffee.imageUrl}
             alt={coffee.name}
           />
-        </div>
+        </Surface>
 
-        <div className="rounded-[2.5rem] border border-white/70 bg-white/80 p-8 shadow-[0_30px_100px_rgba(28,25,23,0.08)] backdrop-blur-xl">
+        <Surface className="rounded-[2.5rem] p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-500">
             {coffee.category}
           </p>
@@ -122,14 +121,14 @@ function CoffeeDetailPage() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-[1.5rem] bg-[linear-gradient(160deg,_rgba(28,25,23,0.96),_rgba(68,64,60,0.88))] p-6 text-white">
+          <Surface className="mt-8 rounded-[1.5rem] p-6" variant="dark">
             <p className="text-xs uppercase tracking-[0.24em] text-stone-300">
               Tasting notes
             </p>
             <p className="mt-3 text-base leading-8 text-stone-100">
               {coffee.notes || "Balanced, expressive, and designed for a clean finish."}
             </p>
-          </div>
+          </Surface>
 
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 pt-6">
             <div>
@@ -141,16 +140,13 @@ function CoffeeDetailPage() {
               </p>
             </div>
             {isAdmin ? (
-              <Link
-                className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
-                to={`/admin/coffees/${coffee.id}/edit`}
-              >
+              <Button to={`/admin/coffees/${coffee.id}/edit`}>
                 <PencilLine size={16} />
                 Edit coffee
-              </Link>
+              </Button>
             ) : null}
           </div>
-        </div>
+        </Surface>
       </section>
     </div>
   );

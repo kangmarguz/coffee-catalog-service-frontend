@@ -1,8 +1,9 @@
 import { Coffee } from "lucide-react";
+import Surface from "./ui/Surface";
 
 function EmptyState({ title, description, action }) {
   return (
-    <div className="rounded-[2rem] border border-dashed border-stone-300 bg-white/70 p-12 text-center shadow-[0_25px_80px_rgba(28,25,23,0.06)]">
+    <Surface className="rounded-[2rem] p-12 text-center" variant="dashed">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-stone-100 text-stone-700">
         <Coffee size={24} />
       </div>
@@ -13,9 +14,8 @@ function EmptyState({ title, description, action }) {
         {description}
       </p>
       {action ? <div className="mt-6">{action}</div> : null}
-    </div>
+    </Surface>
   );
 }
 
 export default EmptyState;
-

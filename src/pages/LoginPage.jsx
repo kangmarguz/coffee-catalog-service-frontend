@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { login } from "../api/authApi";
 import { useAuth } from "../auth/AuthContext";
 import SectionHeading from "../components/SectionHeading";
+import Button from "../components/ui/Button";
+import FormField from "../components/ui/FormField";
+import Surface from "../components/ui/Surface";
 
 function LoginPage() {
   const location = useLocation();
@@ -53,49 +56,45 @@ function LoginPage() {
         description="Guest visitors can browse the catalog. Sign in here to manage coffee products."
       />
 
-      <form
-        className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-[0_25px_80px_rgba(28,25,23,0.08)] backdrop-blur-xl sm:p-8"
+      <Surface
+        as="form"
+        className="rounded-[2rem] p-6 sm:p-8"
         onSubmit={handleSubmit}
       >
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-stone-700">Email</span>
-          <input
-            className="h-12 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 text-sm outline-none transition focus:border-stone-400 focus:bg-white"
-            name="email"
-            type="email"
-            value={formState.email}
-            onChange={handleChange}
-            autoComplete="email"
-            autoFocus
-            required
-          />
-        </label>
+        <FormField
+          label="Email"
+          name="email"
+          type="email"
+          value={formState.email}
+          onChange={handleChange}
+          autoComplete="email"
+          autoFocus
+          required
+        />
 
-        <label className="mt-5 block space-y-2">
-          <span className="text-sm font-medium text-stone-700">Password</span>
-          <input
-            className="h-12 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 text-sm outline-none transition focus:border-stone-400 focus:bg-white"
-            name="password"
-            type="password"
-            value={formState.password}
-            onChange={handleChange}
-            autoComplete="current-password"
-            minLength={6}
-            required
-          />
-        </label>
+        <FormField
+          wrapperClassName="mt-5"
+          label="Password"
+          name="password"
+          type="password"
+          value={formState.password}
+          onChange={handleChange}
+          autoComplete="current-password"
+          minLength={6}
+          required
+        />
 
         <div className="mt-8 flex justify-end">
-          <button
-            className="inline-flex min-w-36 items-center justify-center gap-2 rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
+          <Button
+            className="min-w-36"
             disabled={submitting}
             type="submit"
           >
             <LockKeyhole size={16} />
             {submitting ? "Logging in..." : "Login"}
-          </button>
+          </Button>
         </div>
-      </form>
+      </Surface>
     </div>
   );
 }
