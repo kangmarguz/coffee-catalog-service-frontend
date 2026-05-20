@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "../layouts/AppLayout";
 import AdminCoffeesPage from "../pages/AdminCoffeesPage";
+import CartPage from "../pages/CartPage";
+import CheckoutSuccessPage from "../pages/CheckoutSuccessPage";
 import CatalogPage from "../pages/CatalogPage";
 import CoffeeDetailPage from "../pages/CoffeeDetailPage";
 import EditCoffeePage from "../pages/EditCoffeePage";
@@ -13,6 +15,8 @@ function AppRoutes() {
     <AppLayout>
       <Routes>
         <Route path="/" element={<CatalogPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/success" element={<CheckoutSuccessPage />} />
         <Route path="/coffees/:id" element={<CoffeeDetailPage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />

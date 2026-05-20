@@ -1,8 +1,9 @@
-import { Coffee, LogOut, Settings } from "lucide-react";
+import { Coffee, LogOut, Settings, ShoppingCart } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Button from "../components/ui/Button";
 import Surface from "../components/ui/Surface";
+import { useCartStore } from "../stores/cartStore";
 
 const navLinkClass = ({ isActive }) =>
   [
@@ -15,6 +16,7 @@ const navLinkClass = ({ isActive }) =>
 function AppLayout({ children }) {
   const navigate = useNavigate();
   const { isAdmin, logoutAdmin } = useAuth();
+  const itemCount = useCartStore((state) => state.getItemCount());
 
   function handleLogout() {
     logoutAdmin();
@@ -65,7 +67,19 @@ function AppLayout({ children }) {
                     Logout
                   </Button>
                 </>
-              ) : null}
+              ) : (
+                <NavLink className={navLinkClass} to="/cart">
+                  <span className="inline-flex items-center gap-2">
+                    <ShoppingCart size={16} />
+                    Cart
+                    {itemCount > 0 ? (
+                      <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-stone-900 px-1.5 text-xs text-white">
+                        {itemCount}
+                      </span>
+                    ) : null}
+                  </span>
+                </NavLink>
+              )}
             </nav>
           </div>
         </Surface>

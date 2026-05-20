@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, Bean, MapPin, PencilLine } from "lucide-react";
+import { ArrowLeft, Bean, MapPin, PencilLine, ShoppingCart } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCoffeeById } from "../api/coffeeApi";
@@ -9,11 +9,13 @@ import LoadingState from "../components/LoadingState";
 import StatusBadge from "../components/StatusBadge";
 import Button from "../components/ui/Button";
 import Surface from "../components/ui/Surface";
+import { useCartStore } from "../stores/cartStore";
 import { formatRoastLevel } from "../utils/coffeeValidation";
 
 function CoffeeDetailPage() {
   const { id } = useParams();
   const { isAdmin } = useAuth();
+  const addItem = useCartStore((state) => state.addItem);
   const [coffee, setCoffee] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -66,6 +68,11 @@ function CoffeeDetailPage() {
         }
       />
     );
+  }
+
+  function handleAddToCart() {
+    addItem(coffee);
+    toast.success(`${coffee.name} added to cart.`);
   }
 
   return (
@@ -148,7 +155,12 @@ function CoffeeDetailPage() {
                 <PencilLine size={16} />
                 Edit coffee
               </Button>
-            ) : null}
+            ) : (
+              <Button disabled={!coffee.isAvailable} onClick={handleAddToCart}>
+                <ShoppingCart size={16} />
+                Add to cart
+              </Button>
+            )}
           </div>
         </Surface>
       </section>

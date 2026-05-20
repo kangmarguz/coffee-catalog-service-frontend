@@ -1,10 +1,21 @@
-import { ArrowUpRight, Bean, MapPin } from "lucide-react";
+import { ArrowUpRight, Bean, MapPin, ShoppingCart } from "lucide-react";
+import { toast } from "react-toastify";
+import { useAuth } from "../auth/AuthContext";
+import { useCartStore } from "../stores/cartStore";
 import { formatRoastLevel } from "../utils/coffeeValidation";
 import StatusBadge from "./StatusBadge";
 import Button from "./ui/Button";
 import Surface from "./ui/Surface";
 
 function CoffeeCard({ coffee }) {
+  const { isAdmin } = useAuth();
+  const addItem = useCartStore((state) => state.addItem);
+
+  function handleAddToCart() {
+    addItem(coffee);
+    toast.success(`${coffee.name} added to cart.`);
+  }
+
   return (
     <Surface
       as="article"
@@ -58,13 +69,23 @@ function CoffeeCard({ coffee }) {
             </p>
           </div>
 
-          <Button
-            size="sm"
-            to={`/coffees/${coffee.id}`}
-          >
-            Explore
-            <ArrowUpRight size={16} />
-          </Button>
+          <div className="flex flex-wrap justify-end gap-2">
+            {!isAdmin ? (
+              <Button
+                disabled={!coffee.isAvailable}
+                onClick={handleAddToCart}
+                size="sm"
+                variant="secondary"
+              >
+                <ShoppingCart size={16} />
+                Add
+              </Button>
+            ) : null}
+            <Button size="sm" to={`/coffees/${coffee.id}`}>
+              Explore
+              <ArrowUpRight size={16} />
+            </Button>
+          </div>
         </div>
       </div>
     </Surface>
