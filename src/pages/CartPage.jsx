@@ -51,11 +51,9 @@ function CartPage() {
         customer: values,
         items: items.map((item) => ({
           coffeeId: item.id,
-          name: item.name,
           quantity: item.quantity,
-          unitAmount: Math.round(item.price * 100),
         })),
-        successUrl: `${window.location.origin}/cart/success`,
+        successUrl: `${window.location.origin}/cart/success?session_id={CHECKOUT_SESSION_ID}`,
         cancelUrl: `${window.location.origin}/cart`,
       });
       const checkoutUrl = response.url || response.checkoutUrl;

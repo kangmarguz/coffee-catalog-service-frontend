@@ -1,4 +1,4 @@
-import { Coffee, LogOut, Settings, ShoppingCart } from "lucide-react";
+import { ClipboardList, Coffee, LogOut, Settings, ShoppingCart } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Button from "../components/ui/Button";
@@ -57,6 +57,12 @@ function AppLayout({ children }) {
                       Manage
                     </span>
                   </NavLink>
+                  <NavLink className={navLinkClass} to="/orders">
+                    <span className="inline-flex items-center gap-2">
+                      <ClipboardList size={16} />
+                      Orders
+                    </span>
+                  </NavLink>
                   <Button
                     className="cursor-pointer"
                     onClick={handleLogout}
@@ -68,17 +74,19 @@ function AppLayout({ children }) {
                   </Button>
                 </>
               ) : (
-                <NavLink className={navLinkClass} to="/cart">
-                  <span className="inline-flex items-center gap-2">
-                    <ShoppingCart size={16} />
-                    Cart
-                    {itemCount > 0 ? (
-                      <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-stone-900 px-1.5 text-xs text-white">
-                        {itemCount}
-                      </span>
-                    ) : null}
-                  </span>
-                </NavLink>
+                <>
+                  <NavLink className={navLinkClass} to="/cart">
+                    <span className="inline-flex items-center gap-2">
+                      <ShoppingCart size={16} />
+                      Cart
+                      {itemCount > 0 ? (
+                        <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-stone-900 px-1.5 text-xs text-white">
+                          {itemCount}
+                        </span>
+                      ) : null}
+                    </span>
+                  </NavLink>
+                </>
               )}
             </nav>
           </div>

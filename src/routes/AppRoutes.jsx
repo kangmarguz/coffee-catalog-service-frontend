@@ -8,6 +8,7 @@ import CoffeeDetailPage from "../pages/CoffeeDetailPage";
 import EditCoffeePage from "../pages/EditCoffeePage";
 import LoginPage from "../pages/LoginPage";
 import NewCoffeePage from "../pages/NewCoffeePage";
+import OrderHistoryPage from "../pages/OrderHistoryPage";
 import RequireAdmin from "./RequireAdmin";
 
 function AppRoutes() {
@@ -17,6 +18,14 @@ function AppRoutes() {
         <Route path="/" element={<CatalogPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/success" element={<CheckoutSuccessPage />} />
+        <Route
+          path="/orders"
+          element={
+            <RequireAdmin>
+              <OrderHistoryPage />
+            </RequireAdmin>
+          }
+        />
         <Route path="/coffees/:id" element={<CoffeeDetailPage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
