@@ -72,6 +72,7 @@ function CoffeeCard({ coffee }) {
           <div className="flex flex-wrap justify-end gap-2">
             {!isAdmin ? (
               <Button
+                className="cursor-pointer"
                 disabled={!coffee.isAvailable}
                 onClick={handleAddToCart}
                 size="sm"

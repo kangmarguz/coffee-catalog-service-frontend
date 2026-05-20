@@ -156,7 +156,11 @@ function CoffeeDetailPage() {
                 Edit coffee
               </Button>
             ) : (
-              <Button disabled={!coffee.isAvailable} onClick={handleAddToCart}>
+              <Button
+                className="cursor-pointer"
+                disabled={!coffee.isAvailable}
+                onClick={handleAddToCart}
+              >
                 <ShoppingCart size={16} />
                 Add to cart
               </Button>
